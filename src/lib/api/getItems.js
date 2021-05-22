@@ -8,5 +8,6 @@ export default async function getItems() {
     if (response.error) {
         throw new Error(response.error);
       }
+      console.log(response.data)
     return await response.data;
 }

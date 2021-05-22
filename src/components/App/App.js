@@ -13,7 +13,14 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import getItems from '../../lib/api/getItems'
+import getItems from '../../lib/api/getItems';
+import Login from '../Login/Login';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import './App.css';
 
 const useStyles = (theme) => ({
@@ -25,6 +32,11 @@ const useStyles = (theme) => ({
   },
   title: {
     flexGrow: 1,
+  },
+  container: {
+    maxHeight: 440,
+    maxWidth: '75%',
+    margin: 'auto',
   },
 });
 class App extends React.Component {
@@ -45,48 +57,55 @@ class App extends React.Component {
     const { classes } = this.props;
     return (
       <React.Fragment>
-        <div className={classes.root}>
-          <AppBar position="static">
-            <Toolbar>
-              <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" className={classes.title}>
-                Richmond UI
+        <Router>
+          <div className={classes.root}>
+            <AppBar position="static">
+              <Toolbar>
+                <IconButton className={classes.menuButton} edge="start" color="inherit" aria-label="menu">
+                  <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" className={classes.title}>
+                  Richmond UI
           </Typography>
-              <Button color="inherit">Login</Button>
-            </Toolbar>
-          </AppBar>
-          <TableContainer component={Paper}>
-            <Table aria-label="simple table">
-              <TableHead >
-                <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell align="right">Description</TableCell>
-                  <TableCell align="right">Amount</TableCell>
-                  <TableCell align="right">Availability</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {!isLoading ? (
-                  posts.map((row) => {
-                    return (
-                      <TableRow key={row.name}>
-                        <TableCell component="th" scope="row">
-                          {row.name}
-                        </TableCell>
-                        <TableCell align="right">{row.description}</TableCell>
-                        <TableCell align="right">{row.amount}</TableCell>
-                        <TableCell align="right">{row.availability}</TableCell>
-                      </TableRow>);
-                  }))
-                  : (
-                    <p>Loading...</p>
-                  )}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </div>
+                <Button component={Link} color="inherit" to="/Login">Login</Button>
+              </Toolbar>
+            </AppBar>
+            <Switch>
+              <Route exact path="/">
+                <TableContainer align="center" component={Paper} className={classes.container} >
+                  <Table stickyHeader className={classes.table} size="small" aria-label="simple table">
+                    <TableHead >
+                      <TableRow>
+                        <TableCell >Name</TableCell>
+                        <TableCell align="right">Description</TableCell>
+                        <TableCell align="right">Amount</TableCell>
+                        <TableCell align="right">Availability</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {!isLoading ? (
+                        posts.map((row) => {
+                          return (
+                            <TableRow key={row.id}>
+                              <TableCell >{row.name}</TableCell>
+                              <TableCell align="right">{row.description}</TableCell>
+                              <TableCell align="right">{row.amount}</TableCell>
+                              <TableCell align="right">{String(row.availability)}</TableCell>
+                            </TableRow>);
+                        }))
+                        : (
+                          <p>Loading...</p>
+                        )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </Route>
+              <Route path="/Login">
+                <Login />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
       </React.Fragment>
     )
   }
