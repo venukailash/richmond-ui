@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import getItems from '../../lib/api/getItems';
-
+import { useLocation } from "react-router-dom";
 
 const useStyles = (theme) => ({
     root: {
@@ -26,6 +26,8 @@ const useStyles = (theme) => ({
         margin: 'auto',
     },
 });
+
+const location = (props) => (props);
 class Items extends React.Component {
 
     state = {
@@ -41,12 +43,11 @@ class Items extends React.Component {
 
     render() {
         const { isLoading, posts } = this.state;
-        const { classes } = this.props;
-        console.log(this.props)
+        const { classes, location } = this.props;
         return (
             <React.Fragment>
                 <div className={classes.root}>
-                    
+                <p>Hello {location.state.username}</p>
                     <TableContainer align="center" component={Paper} className={classes.container} >
                         <Table stickyHeader className={classes.table} size="small" aria-label="simple table">
                             <TableHead >
@@ -80,4 +81,4 @@ class Items extends React.Component {
     }
 }
 
-export default withStyles(useStyles)(Items);
+export default (useLocation,location)(withStyles(useStyles)(Items));

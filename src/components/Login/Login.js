@@ -6,13 +6,7 @@ import Input from '@material-ui/core/Input'
 import Button from '@material-ui/core/Button'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Grid from '@material-ui/core/Grid';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-} from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -48,8 +42,6 @@ function Login() {
     const logg = () => {
         console.log(username, password)
     }
-    let location = useLocation();
-    console.log(location);
     return (
         <React.Fragment align="center">
             <form align="center" className={classes.root} noValidate autoComplete="off">
@@ -71,7 +63,7 @@ function Login() {
                     <Grid item xs={12}>
                         <FormControl variant="outlined">
                             <Button component={Link} align="center" onClick={logg}
-                                variant="contained" color="primary" to="/Items" params={{ testvalue: "hello" }}>Login</Button>
+                                variant="contained" color="primary" to={{ pathname: '/Items', state: {username, password} }}>Login</Button>
                         </FormControl>
                     </Grid>
                 </Grid>
