@@ -10,9 +10,9 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
-  } from "react-router-dom";
-import Items from '../Items/Items';
+    Link,
+} from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,44 +46,36 @@ function Login() {
         setPassword(event.target.value);
     };
     const logg = () => {
-        console.log(username + " " + password);
-
+        console.log(username, password)
     }
+    let location = useLocation();
+    console.log(location);
     return (
         <React.Fragment align="center">
-            <Router>
-                <Switch>
-                    <Route exact path="/Login">
-                        <form align="center" className={classes.root} noValidate autoComplete="off">
-                            <Grid container spacing={3} className={classes.formLogin}>
-                                <Grid item xs={12}>
-                                    <FormControl variant="outlined">
-                                        <InputLabel htmlFor="component-simple">UserName</InputLabel>
-                                        <Input id="component-simple" value={username} onChange={usernameValue} />
-                                        <FormHelperText id="component-helper-text">Enter your username </FormHelperText>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <FormControl variant="outlined">
-                                        <InputLabel htmlFor="component-simple">Password</InputLabel>
-                                        <Input id="component-simple" value={password} onChange={passwordValue} />
-                                        <FormHelperText id="component-helper-text">Enter your password </FormHelperText>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <FormControl variant="outlined">
-                                        <Button component={Link} align="center" onClick={logg}
-                                            variant="contained" color="primary" to="/Items">Login</Button>
-                                    </FormControl>
-                                </Grid>
-                            </Grid>
-                        </form>
-                    </Route>
-                    <Route path="/Items">
-                        <Items />
-                    </Route>
-                </Switch>
-            </Router>
+            <form align="center" className={classes.root} noValidate autoComplete="off">
+                <Grid container spacing={3} className={classes.formLogin}>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined">
+                            <InputLabel htmlFor="component-simple">UserName</InputLabel>
+                            <Input id="component-simple" value={username} onChange={usernameValue} />
+                            <FormHelperText id="component-helper-text">Enter your username </FormHelperText>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined">
+                            <InputLabel htmlFor="component-simple">Password</InputLabel>
+                            <Input id="component-simple" value={password} onChange={passwordValue} />
+                            <FormHelperText id="component-helper-text">Enter your password </FormHelperText>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined">
+                            <Button component={Link} align="center" onClick={logg}
+                                variant="contained" color="primary" to="/Items" params={{ testvalue: "hello" }}>Login</Button>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+            </form>
         </React.Fragment >
     )
 }

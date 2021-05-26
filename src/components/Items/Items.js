@@ -42,9 +42,11 @@ class Items extends React.Component {
     render() {
         const { isLoading, posts } = this.state;
         const { classes } = this.props;
+        console.log(this.props)
         return (
             <React.Fragment>
                 <div className={classes.root}>
+                    
                     <TableContainer align="center" component={Paper} className={classes.container} >
                         <Table stickyHeader className={classes.table} size="small" aria-label="simple table">
                             <TableHead >

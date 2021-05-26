@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Login from '../Login/Login';
 import {
   BrowserRouter as Router,
   Route,
@@ -34,9 +33,9 @@ class App extends React.Component {
 
   render() {
     const { classes } = this.props;
+    console.log(classes);
     return (
       <React.Fragment>
-        <Router>
           <div className={classes.root}>
             <AppBar position="static">
               <Toolbar>
@@ -46,14 +45,12 @@ class App extends React.Component {
                 <Typography variant="h6" className={classes.title}>
                   Richmond UI
           </Typography>
-                <Button component={Link} color="inherit" to="/Login">Login</Button>
+            <Link to={{pathname:'/Login', state: {hello:'venu'}}}>
+                <Button color="inherit">Login</Button>
+            </Link>
               </Toolbar>
             </AppBar>
-            <Route path="/Login">
-              <Login />
-            </Route>
           </div>
-        </Router>
       </React.Fragment>
     )
   }
