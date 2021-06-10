@@ -6,7 +6,8 @@ import {
     Input,
     Button,
     FormHelperText,
-    Grid
+    Grid,
+    Typography
 } from '@material-ui/core'
 import { Link } from "react-router-dom";
 
@@ -41,9 +42,6 @@ function Login() {
     const passwordValue = (event) => {
         setPassword(event.target.value);
     };
-    const logg = () => {
-        console.log(username, password)
-    }
     return (
         <React.Fragment align="center">
             <form align="center" className={classes.root} noValidate autoComplete="off">
@@ -64,9 +62,14 @@ function Login() {
                     </Grid>
                     <Grid item xs={12}>
                         <FormControl variant="outlined">
-                            <Button component={Link} align="center" onClick={logg}
+                            <Button component={Link} align="center"
                                 variant="contained" color="primary" to={{ pathname: '/Items', state: { username, password } }}>Login</Button>
                         </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography>Here for the first time? 
+                                <Link to={{pathname : '/Signup'}}>Sign Up</Link>
+                        </Typography>
                     </Grid>
                 </Grid>
             </form>
