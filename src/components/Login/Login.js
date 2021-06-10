@@ -1,11 +1,13 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input'
-import Button from '@material-ui/core/Button'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import Grid from '@material-ui/core/Grid';
+import {
+    FormControl,
+    InputLabel,
+    Input,
+    Button,
+    FormHelperText,
+    Grid
+} from '@material-ui/core'
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +65,7 @@ function Login() {
                     <Grid item xs={12}>
                         <FormControl variant="outlined">
                             <Button component={Link} align="center" onClick={logg}
-                                variant="contained" color="primary" to={{ pathname: '/Items', state: {username, password} }}>Login</Button>
+                                variant="contained" color="primary" to={{ pathname: '/Items', state: { username, password } }}>Login</Button>
                         </FormControl>
                     </Grid>
                 </Grid>
