@@ -1,18 +1,14 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input'
-import Button from '@material-ui/core/Button'
-import FormHelperText from '@material-ui/core/FormHelperText'
-import Grid from '@material-ui/core/Grid';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-  } from "react-router-dom";
-import Items from '../Items/Items';
+    FormControl,
+    InputLabel,
+    Input,
+    Button,
+    FormHelperText,
+    Grid
+} from '@material-ui/core'
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,44 +42,34 @@ function Login() {
         setPassword(event.target.value);
     };
     const logg = () => {
-        console.log(username + " " + password);
-
+        console.log(username, password)
     }
     return (
         <React.Fragment align="center">
-            <Router>
-                <Switch>
-                    <Route exact path="/Login">
-                        <form align="center" className={classes.root} noValidate autoComplete="off">
-                            <Grid container spacing={3} className={classes.formLogin}>
-                                <Grid item xs={12}>
-                                    <FormControl variant="outlined">
-                                        <InputLabel htmlFor="component-simple">UserName</InputLabel>
-                                        <Input id="component-simple" value={username} onChange={usernameValue} />
-                                        <FormHelperText id="component-helper-text">Enter your username </FormHelperText>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <FormControl variant="outlined">
-                                        <InputLabel htmlFor="component-simple">Password</InputLabel>
-                                        <Input id="component-simple" value={password} onChange={passwordValue} />
-                                        <FormHelperText id="component-helper-text">Enter your password </FormHelperText>
-                                    </FormControl>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <FormControl variant="outlined">
-                                        <Button component={Link} align="center" onClick={logg}
-                                            variant="contained" color="primary" to="/Items">Login</Button>
-                                    </FormControl>
-                                </Grid>
-                            </Grid>
-                        </form>
-                    </Route>
-                    <Route path="/Items">
-                        <Items />
-                    </Route>
-                </Switch>
-            </Router>
+            <form align="center" className={classes.root} noValidate autoComplete="off">
+                <Grid container spacing={3} className={classes.formLogin}>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined">
+                            <InputLabel htmlFor="component-simple">UserName</InputLabel>
+                            <Input id="component-simple" value={username} onChange={usernameValue} />
+                            <FormHelperText id="component-helper-text">Enter your username </FormHelperText>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined">
+                            <InputLabel htmlFor="component-simple">Password</InputLabel>
+                            <Input id="component-simple" value={password} onChange={passwordValue} />
+                            <FormHelperText id="component-helper-text">Enter your password </FormHelperText>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined">
+                            <Button component={Link} align="center" onClick={logg}
+                                variant="contained" color="primary" to={{ pathname: '/Items', state: { username, password } }}>Login</Button>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+            </form>
         </React.Fragment >
     )
 }
